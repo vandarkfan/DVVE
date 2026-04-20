@@ -43,22 +43,22 @@ class DVVE(torch.nn.Module):
         if use_gpu:
             return Variable(torch.from_numpy(x).long().cuda())
 
-    def DVC(self, lhs, rel, rhs,ent_embs, time):
+    def DVC(self, lhs, rel, rhs,ent_embs, view):
 
-        lhs = lhs[:, :self.rank] + time[:, 2 * self.rank:3 * self.rank], lhs[:, self.rank:] + time[:,
+        lhs = lhs[:, :self.rank] + view[:, 2 * self.rank:3 * self.rank], lhs[:, self.rank:] + view[:,
         3 * self.rank:4 * self.rank]
-        rhs = rhs[:, :self.rank] + time[:, 4 * self.rank:5 * self.rank], rhs[:, self.rank:] + time[:,
+        rhs = rhs[:, :self.rank] + view[:, 4 * self.rank:5 * self.rank], rhs[:, self.rank:] + view[:,
         5 * self.rank:6 * self.rank]
-        bias_t_r =  time[:, 4 * self.rank:5 * self.rank]
-        bias_t_i =  time[:, 5 * self.rank:6 * self.rank]
+        bias_t_r =  view[:, 4 * self.rank:5 * self.rank]
+        bias_t_i =  view[:, 5 * self.rank:6 * self.rank]
 
-        time = time[:, :self.rank], time[:, self.rank:2 * self.rank]
+        view = view[:, :self.rank], view[:, self.rank:2 * self.rank]
 
         right = ent_embs
         right = right[:, :self.rank], right[:, self.rank:]
         rel = rel[:, :self.rank], rel[:, self.rank:2 * self.rank]
 
-        rt = rel[0] * time[0], rel[1] * time[0], rel[0] * time[1], rel[1] * time[1]
+        rt = rel[0] * view[0], rel[1] * view[0], rel[0] * view[1], rel[1] * view[1]
         full_rel = rt[0] - rt[3], rt[1] + rt[2]
 
         return (
