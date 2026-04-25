@@ -1,4 +1,4 @@
-﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿<h1 align="center">
+﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿<h1 align="center">
   DVVE
 </h1>
 
@@ -7,8 +7,6 @@
 <h2 align="center">
   <img align="center"  src="overview.png" alt="...">
 </h2>
-
-
 
 
 
